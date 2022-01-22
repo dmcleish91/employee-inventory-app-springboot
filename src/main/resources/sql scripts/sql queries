@@ -1,0 +1,25 @@
+CREATE DATABASE employee_info;
+USE employee_info:
+
+DROP TABLE IF EXISTS ‘employees’
+DROP TABLE IF EXISTS ‘stock’
+
+CREATE TABLE `employees` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `department` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `salary` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `stock` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `available_units` bigint DEFAULT NULL,
+  `sold_units` bigint DEFAULT NULL,
+  `stock_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+SELECT * FROM employees;
