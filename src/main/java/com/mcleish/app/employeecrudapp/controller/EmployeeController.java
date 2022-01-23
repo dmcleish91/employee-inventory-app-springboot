@@ -23,11 +23,11 @@ public class EmployeeController {
         return employeeService.findAll();
     }
 
-    //todo - pageandsort test method can be removed
-    /*@GetMapping(value = "/")
+    //todo - employee pageandsort test method can be removed
+    @GetMapping(value = "/")
     public Page<Employee> getEmployeesPage() {
         return employeeService.pageAndSortEmployee(1, "firstName", "asc");
-    }*/
+    }
 
     @GetMapping(value = "/page/{pageNum}")
     public Page<Employee> pageAndSortEmployee(@PathVariable(value = "pageNum") int pageNum,

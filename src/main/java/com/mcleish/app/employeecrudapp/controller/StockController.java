@@ -23,6 +23,7 @@ public class StockController {
         return stockService.findAllStock();
     }
 
+    //todo - stock pageandsort test method can be removed
     @GetMapping(value = "/")
     public Page<Stock> getStockPage() {
         return stockService.pageAndSortStock(1, "stockName", "asc");
