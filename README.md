@@ -2,7 +2,7 @@
 
 Build an Employee/Inventory CRUD API for a store dashboard using Spring Boot, MySQL, JPA and Hibernate.
 
-[Demo application using endpoint](https://reactjs-frontend-employeestock.herokuapp.com/)
+[Demo application using endpoints](https://reactjs-frontend-employeestock.herokuapp.com/)
 
 ## Steps to Setup
 
