@@ -61,3 +61,8 @@ The app defines following CRUD APIs.
 | DELETE | /api/stock/{theId} | Delete stock |
 
 Test endpoints using Postman or preferred method.
+
+## To-Do
+
+- [ ] Add Spring Security support
+
