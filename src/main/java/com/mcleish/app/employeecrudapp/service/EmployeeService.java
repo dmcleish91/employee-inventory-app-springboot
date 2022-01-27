@@ -69,7 +69,7 @@ public class EmployeeService {
 
         // remove commas from salary field
         String salary = theEmployee.getSalary();
-        salary = salary.replaceAll(",","");
+        salary = salary.replaceAll(",", "");
 
         employee.setFirstName(theEmployee.getFirstName());
         employee.setLastName(theEmployee.getLastName());
