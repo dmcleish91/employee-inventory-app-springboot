@@ -26,15 +26,12 @@ public class Stock {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Stock stock = (Stock) o;
-        return Objects.equals(id, stock.id) &&
-                Objects.equals(stockName, stock.stockName) &&
-                Objects.equals(availableUnits, stock.availableUnits) &&
-                Objects.equals(soldUnits, stock.soldUnits);
+        return Objects.equals(id, stock.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, stockName, availableUnits, soldUnits);
+        return Objects.hash(id);
     }
 
     public Stock() {

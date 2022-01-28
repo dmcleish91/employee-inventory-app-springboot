@@ -32,7 +32,9 @@ public class EmployeeService {
         return employeeRepository.findByFirstName(name);
     }
 
-    public Page<Employee> pageAndSortEmployee(@PathVariable(value = "pageNum") int pageNum, @RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir) {
+    public Page<Employee> pageAndSortEmployee(@PathVariable(value = "pageNum") int pageNum,
+                                              @RequestParam("sortField") String sortField,
+                                              @RequestParam("sortDir") String sortDir) {
         int pageSize = 5;
 
         Page<Employee> page = findPaginated(pageNum, pageSize, sortField, sortDir);
@@ -87,7 +89,7 @@ public class EmployeeService {
 
         employeeRepository.delete(employee);
         Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
+        response.put("deleted", true);
         return ResponseEntity.ok(response);
 
     }
