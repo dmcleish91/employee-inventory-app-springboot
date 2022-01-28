@@ -3,6 +3,7 @@ package com.mcleish.app.employeecrudapp.service;
 import com.mcleish.app.employeecrudapp.dao.EmployeeRepository;
 import com.mcleish.app.employeecrudapp.entity.Employee;
 import com.mcleish.app.employeecrudapp.exception.ResourceNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,13 +20,14 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public List<Employee> findAll() {
-        return employeeRepository.findAll();
+    public ResponseEntity<List<Employee>> findAll() {
+        return ResponseEntity.ok(employeeRepository.findAll());
     }
 
     public Employee findByFirstName(@PathVariable String name) {
@@ -61,10 +63,11 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(@RequestBody Employee employee) {
+        log.info("Saving new employee: {} {}", employee.getFirstName(), employee.getLastName());
         return employeeRepository.save(employee);
     }
 
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long theId, @RequestBody Employee theEmployee) {
+    public Employee updateEmployee(@PathVariable Long theId, @RequestBody Employee theEmployee) {
 
         Employee employee = employeeRepository.findById(theId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee does not exist with id: " + theId));
@@ -80,7 +83,7 @@ public class EmployeeService {
         employee.setDepartment(theEmployee.getDepartment());
         employee = employeeRepository.save(employee);
 
-        return ResponseEntity.ok(employee);
+        return employee;
     }
 
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long theId) {

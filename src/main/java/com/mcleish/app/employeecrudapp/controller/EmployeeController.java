@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +21,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping(value = "/all")
-    public List<Employee> getAllEmployees() {
+    public ResponseEntity<List<Employee>> getAllEmployees() {
         return employeeService.findAll();
     }
 
@@ -52,14 +54,15 @@ public class EmployeeController {
         return employeeService.getEmployeeById(theId);
     }
 
-    @PostMapping(value = "/")
-    public Employee saveEmployee(@RequestBody Employee employee) {
-        return employeeService.saveEmployee(employee);
+    @PostMapping(value = "/save")
+    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/employees/save").toUriString());
+        return ResponseEntity.created(uri).body(employeeService.saveEmployee(employee));
     }
 
-    @PutMapping(value = "/{theId}")
+    @PutMapping(value = "/update/{theId}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long theId, @RequestBody Employee theEmployee) {
-        return employeeService.updateEmployee(theId, theEmployee);
+        return ResponseEntity.ok(employeeService.updateEmployee(theId, theEmployee));
     }
 
     @DeleteMapping(value = "/{theId}")
