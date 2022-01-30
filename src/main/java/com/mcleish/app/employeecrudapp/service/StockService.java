@@ -27,13 +27,11 @@ public class StockService {
     }
 
     public String sumOfAvailableUnits() {
-        Long total = Long.parseLong(stockRepository.sumOfAvailableUnits());
-        return String.format("%,d",total);
+        return stockRepository.sumOfAvailableUnits();
     }
 
     public String sumOfSoldUnits() {
-        Long total = Long.parseLong(stockRepository.sumOfSoldUnits());
-        return String.format("%,d",total);
+        return stockRepository.sumOfSoldUnits();
     }
 
     public Stock getStockById(@PathVariable long theId) {
