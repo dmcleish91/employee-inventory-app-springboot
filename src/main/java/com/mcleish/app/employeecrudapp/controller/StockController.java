@@ -23,12 +23,6 @@ public class StockController {
         return stockService.findAllStock();
     }
 
-    //todo - stock pageandsort test method can be removed
-    @GetMapping(value = "/")
-    public Page<Stock> getStockPage() {
-        return stockService.pageAndSortStock(1, "stockName", "asc");
-    }
-
     @GetMapping(value = "/page/{pageNum}")
     public Page<Stock> pageAndSortStock(@PathVariable(value = "pageNum") int pageNum,
                                         @RequestParam("sortField") String sortField,

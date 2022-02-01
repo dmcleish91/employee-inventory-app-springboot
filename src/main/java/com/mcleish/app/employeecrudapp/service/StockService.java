@@ -82,7 +82,9 @@ public class StockService {
 
     }
 
-    public Page<Stock> pageAndSortStock(@PathVariable(value = "pageNum") int pageNum, @RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir) {
+    public Page<Stock> pageAndSortStock(@PathVariable(value = "pageNum") int pageNum,
+                                        @RequestParam("sortField") String sortField,
+                                        @RequestParam("sortDir") String sortDir) {
         int pageSize = 5;
 
         Page<Stock> page = findPaginated(pageNum, pageSize, sortField, sortDir);

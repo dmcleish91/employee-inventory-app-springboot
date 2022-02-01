@@ -3,7 +3,6 @@ package com.mcleish.app.employeecrudapp.service;
 import com.mcleish.app.employeecrudapp.dao.EmployeeRepository;
 import com.mcleish.app.employeecrudapp.entity.Employee;
 import com.mcleish.app.employeecrudapp.exception.ResourceNotFoundException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,14 +19,13 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Slf4j
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public ResponseEntity<List<Employee>> findAll() {
-        return ResponseEntity.ok(employeeRepository.findAll());
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
     }
 
     public Employee findByFirstName(@PathVariable String name) {
@@ -41,7 +39,6 @@ public class EmployeeService {
 
         Page<Employee> page = findPaginated(pageNum, pageSize, sortField, sortDir);
 
-        //http://localhost:8080/api/employees/page/2?sortField=firstName&sortDir=asc
         return page;
 
     }
@@ -63,7 +60,6 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(@RequestBody Employee employee) {
-        log.info("Saving new employee: {} {}", employee.getFirstName(), employee.getLastName());
         return employeeRepository.save(employee);
     }
 
@@ -72,7 +68,7 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(theId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee does not exist with id: " + theId));
 
-        // remove commas from salary field
+        // remove comma from salary field
         String salary = theEmployee.getSalary();
         salary = salary.replaceAll(",", "");
 
@@ -86,14 +82,14 @@ public class EmployeeService {
         return employee;
     }
 
-    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long theId) {
+    public Map<String, Boolean> deleteEmployee(@PathVariable Long theId) {
         Employee employee = employeeRepository.findById(theId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee does not exist with id: " + theId));
 
         employeeRepository.delete(employee);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", true);
-        return ResponseEntity.ok(response);
+        return response;
 
     }
 
