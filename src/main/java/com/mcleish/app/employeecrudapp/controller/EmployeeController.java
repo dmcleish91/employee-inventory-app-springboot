@@ -60,7 +60,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.updateEmployee(theId, theEmployee));
     }
 
-    @DeleteMapping(value = "/{theId}")
+    @DeleteMapping(value = "/delete/{theId}")
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long theId) {
         return new ResponseEntity<>(employeeService.deleteEmployee(theId), HttpStatus.OK) ;
 

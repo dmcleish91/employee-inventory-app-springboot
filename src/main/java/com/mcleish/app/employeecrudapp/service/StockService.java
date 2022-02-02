@@ -53,7 +53,7 @@ public class StockService {
         return stockRepository.save(stock);
     }
 
-    public ResponseEntity<Stock> updateStock(@PathVariable Long theId, @RequestBody Stock theStock) {
+    public Stock updateStock(@PathVariable Long theId, @RequestBody Stock theStock) {
         Stock stock = stockRepository.findById(theId)
                 .orElseThrow(() -> new ResourceNotFoundException("Stock does not exist with id: " + theId));
 
@@ -68,17 +68,17 @@ public class StockService {
         stock.setSoldUnits(soldUnits);
         stock = stockRepository.save(stock);
 
-        return ResponseEntity.ok(stock);
+        return stock;
     }
 
-    public ResponseEntity<Map<String, Boolean>> deleteStock(@PathVariable Long theId) {
+    public Map<String, Boolean> deleteStock(@PathVariable Long theId) {
         Stock stock = stockRepository.findById(theId)
                 .orElseThrow(() -> new ResourceNotFoundException("Stock does not exist with id: " + theId));
 
         stockRepository.delete(stock);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
-        return ResponseEntity.ok(response);
+        return response;
 
     }
 
