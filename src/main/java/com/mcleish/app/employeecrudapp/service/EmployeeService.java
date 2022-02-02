@@ -39,7 +39,6 @@ public class EmployeeService {
 
         Page<Employee> page = findPaginated(pageNum, pageSize, sortField, sortDir);
 
-        //http://localhost:8080/api/employees/page/2?sortField=firstName&sortDir=asc
         return page;
 
     }
@@ -64,12 +63,12 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long theId, @RequestBody Employee theEmployee) {
+    public Employee updateEmployee(@PathVariable Long theId, @RequestBody Employee theEmployee) {
 
         Employee employee = employeeRepository.findById(theId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee does not exist with id: " + theId));
 
-        // remove commas from salary field
+        // remove comma from salary field
         String salary = theEmployee.getSalary();
         salary = salary.replaceAll(",", "");
 
@@ -80,17 +79,17 @@ public class EmployeeService {
         employee.setDepartment(theEmployee.getDepartment());
         employee = employeeRepository.save(employee);
 
-        return ResponseEntity.ok(employee);
+        return employee;
     }
 
-    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long theId) {
+    public Map<String, Boolean> deleteEmployee(@PathVariable Long theId) {
         Employee employee = employeeRepository.findById(theId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee does not exist with id: " + theId));
 
         employeeRepository.delete(employee);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", true);
-        return ResponseEntity.ok(response);
+        return response;
 
     }
 

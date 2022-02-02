@@ -4,6 +4,7 @@ import com.mcleish.app.employeecrudapp.entity.Stock;
 import com.mcleish.app.employeecrudapp.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,52 +20,46 @@ public class StockController {
     StockService stockService;
 
     @GetMapping(value = "/all")
-    public List<Stock> getAllStock() {
-        return stockService.findAllStock();
-    }
-
-    //todo - stock pageandsort test method can be removed
-    @GetMapping(value = "/")
-    public Page<Stock> getStockPage() {
-        return stockService.pageAndSortStock(1, "stockName", "asc");
+    public ResponseEntity<List<Stock>> getAllStock() {
+        return new ResponseEntity<>(stockService.findAllStock(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/page/{pageNum}")
-    public Page<Stock> pageAndSortStock(@PathVariable(value = "pageNum") int pageNum,
+    public ResponseEntity<Page<Stock>> pageAndSortStock(@PathVariable(value = "pageNum") int pageNum,
                                         @RequestParam("sortField") String sortField,
                                         @RequestParam("sortDir") String sortDir) {
-        return stockService.pageAndSortStock(pageNum, sortField, sortDir);
+        return new ResponseEntity<>(stockService.pageAndSortStock(pageNum, sortField, sortDir), HttpStatus.OK);
 
     }
 
-    @GetMapping(value = "/availableSum")
-    public String getSumOfAvailableUnits() {
-        return stockService.sumOfAvailableUnits();
+    @GetMapping(value = "/totals/availableSum")
+    public ResponseEntity<String> getSumOfAvailableUnits() {
+        return new ResponseEntity<>(stockService.sumOfAvailableUnits(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/soldSum")
-    public String getSumOfSoldUnits() {
-        return stockService.sumOfSoldUnits();
+    @GetMapping(value = "/totals/soldSum")
+    public ResponseEntity<String> getSumOfSoldUnits() {
+        return new ResponseEntity<>(stockService.sumOfSoldUnits(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{theId}")
-    public Stock getStockById(@PathVariable long theId) {
-        return stockService.getStockById(theId);
+    public ResponseEntity<Stock> getStockById(@PathVariable long theId) {
+        return new ResponseEntity<>(stockService.getStockById(theId), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/")
-    public Stock saveStock(@RequestBody Stock stock) {
-        return stockService.saveStock(stock);
+    @PostMapping(value = "/save")
+    public ResponseEntity<Stock> saveStock(@RequestBody Stock stock) {
+        return new ResponseEntity<>(stockService.saveStock(stock), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/{theId}")
+    @PutMapping(value = "/update/{theId}")
     public ResponseEntity<Stock> updateStock(@PathVariable Long theId, @RequestBody Stock theStock) {
-        return stockService.updateStock(theId, theStock);
+        return new ResponseEntity<>(stockService.updateStock(theId, theStock), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{theId}")
+    @DeleteMapping(value = "/delete/{theId}")
     public ResponseEntity<Map<String, Boolean>> deleteStock(@PathVariable Long theId) {
-        return stockService.deleteStock(theId);
+        return new ResponseEntity<>(stockService.deleteStock(theId), HttpStatus.OK);
     }
 
 }
