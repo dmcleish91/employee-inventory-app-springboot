@@ -1,7 +1,7 @@
-package com.mcleish.app.employeecrudapp.controller;
+package com.mcleish.app.employeecrudapp.domain.employee.controller;
 
-import com.mcleish.app.employeecrudapp.entity.Employee;
-import com.mcleish.app.employeecrudapp.service.EmployeeService;
+import com.mcleish.app.employeecrudapp.domain.employee.model.Employee;
+import com.mcleish.app.employeecrudapp.domain.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

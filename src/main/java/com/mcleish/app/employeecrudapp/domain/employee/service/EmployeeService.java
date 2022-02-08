@@ -1,14 +1,13 @@
-package com.mcleish.app.employeecrudapp.service;
+package com.mcleish.app.employeecrudapp.domain.employee.service;
 
-import com.mcleish.app.employeecrudapp.dao.EmployeeRepository;
-import com.mcleish.app.employeecrudapp.entity.Employee;
-import com.mcleish.app.employeecrudapp.exception.ResourceNotFoundException;
+import com.mcleish.app.employeecrudapp.domain.employee.repository.EmployeeRepository;
+import com.mcleish.app.employeecrudapp.domain.employee.model.Employee;
+import com.mcleish.app.employeecrudapp.infrastructure.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

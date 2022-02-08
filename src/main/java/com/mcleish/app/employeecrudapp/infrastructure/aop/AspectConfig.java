@@ -1,4 +1,4 @@
-package com.mcleish.app.employeecrudapp.aop;
+package com.mcleish.app.employeecrudapp.infrastructure.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

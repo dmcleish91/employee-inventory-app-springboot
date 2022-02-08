@@ -66,4 +66,5 @@ Test endpoints using Postman or preferred method.
 
 - [ ] Add Spring AOP Support
 - [ ] Add Spring Security support
+- [ ] Add Validation
 

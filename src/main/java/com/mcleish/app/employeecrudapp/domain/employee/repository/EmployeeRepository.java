@@ -1,6 +1,6 @@
-package com.mcleish.app.employeecrudapp.dao;
+package com.mcleish.app.employeecrudapp.domain.employee.repository;
 
-import com.mcleish.app.employeecrudapp.entity.Employee;
+import com.mcleish.app.employeecrudapp.domain.employee.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

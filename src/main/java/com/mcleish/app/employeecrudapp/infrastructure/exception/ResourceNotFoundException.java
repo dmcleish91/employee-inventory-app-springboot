@@ -1,4 +1,4 @@
-package com.mcleish.app.employeecrudapp.exception;
+package com.mcleish.app.employeecrudapp.infrastructure.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

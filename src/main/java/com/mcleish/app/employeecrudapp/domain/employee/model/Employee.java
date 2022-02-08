@@ -1,6 +1,10 @@
-package com.mcleish.app.employeecrudapp.entity;
+package com.mcleish.app.employeecrudapp.domain.employee.model;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -9,23 +13,31 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "department")
+    @Column(name = "department", nullable = false)
     private String department;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "salary")
+    @Column(name = "salary", nullable = false)
     private String salary;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
+    private Timestamp createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
     @Override
     public boolean equals(Object o) {
@@ -44,12 +56,16 @@ public class Employee {
 
     }
 
-    public Employee(String firstName, String lastName, String department, String email, String salary) {
+    public Employee(String firstName, String lastName, String department,
+                    String email, String salary, Timestamp createdAt,
+                    Timestamp updatedAt) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;
         this.email = email;
         this.salary = salary;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public long getId() {
@@ -100,6 +116,22 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -109,6 +141,8 @@ public class Employee {
                 ", department='" + department + '\'' +
                 ", email='" + email + '\'' +
                 ", salary='" + salary + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
